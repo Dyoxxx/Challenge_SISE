@@ -1,0 +1,13 @@
+[project]
+name = "webcam-tracker"
+version = "0.1.0"
+requires-python = ">=3.10"
+dependencies = [
+    "opencv-python>=4.9.0",
+    "mediapipe>=0.10.14",
+    "deepface>=0.0.93",
+    "torch>=2.2.0",
+    "torchvision>=0.17.0",
+    "numpy>=1.26.0",
+    "tf-keras>=2.16.0",
+]
