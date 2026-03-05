@@ -1,80 +1,95 @@
-# Webcam Tracker — Expressions & Signes de mains
+# ✦ GestureDraw v3 — Design Néon
 
-Détection temps réel via webcam :
-- **Expressions faciales** : happy, sad, surprised, neutral, angry, fear, disgust
-- **Signes de mains** : thumbs_up, fist, peace, pointing, open_hand, ok
-
-Affichage côte-à-côte : webcam (gauche) + image du dataset associée (droite).
+Application Python de dessin par gestes de la main.
+**Compatible toutes versions de mediapipe** (ancienne et nouvelle API).
 
 ---
 
-## Installation
+## 📁 Structure
+
+```
+gesture_draw_v3/
+├── main.py             ← Point d'entrée
+├── config.py           ← Paramètres + palette néon
+├── hand_tracker.py     ← ★ Abstraction mediapipe (auto-détecte la version)
+├── gesture.py          ← Détection des 5 gestes
+├── drawing.py          ← Moteur dessin + undo + PNG
+├── shape_detector.py   ← Reconnaissance formes géo.
+├── renderer.py         ← Primitives Pillow (glow, texte antialiasé)
+├── ui.py               ← Interface néon complète
+├── requirements.txt
+├── hand_landmarker.task  ← (téléchargé automatiquement au 1er lancement)
+└── saves/              ← Dessins (créé automatiquement)
+```
+
+---
+
+## 🚀 Installation & Lancement
 
 ```bash
-pip install opencv-python mediapipe fer torch torchvision numpy
+# 1. Installer les dépendances
+pip install opencv-python mediapipe Pillow numpy
+
+# 2. Lancer
+python main.py
 ```
 
-> `fer` dépend de TensorFlow. Si tu veux éviter TF, commente le bloc FER
-> dans le script et branche DeepFace ou un modèle PyTorch custom à la place.
+> ✅ **Python 3.10+** · Webcam obligatoire  
+> ✅ Compatible **Windows / Linux / macOS**  
+> ✅ Compatible **mediapipe < 0.10.14** (ancienne API `solutions`)  
+> ✅ Compatible **mediapipe >= 0.10.14** (nouvelle API `tasks`) — télécharge `hand_landmarker.task` automatiquement
 
 ---
 
-## Lancer
+## ⚠️ Première exécution (mediapipe 0.10+)
 
-```bash
-python webcam_tracker.py
-```
+Au premier lancement, si `hand_landmarker.task` est absent, il sera **téléchargé automatiquement** (~5 Mo) depuis Google Storage.
 
-Appuie sur **Q** pour quitter.
-
----
-
-## Ajouter tes propres images
-
-Structure attendue :
-
-```
-dataset/
-├── happy/
-│   ├── image1.jpg
-│   └── image2.png
-├── sad/
-├── peace/
-├── thumbs_up/
-└── ...
-```
-
-Si le dossier `dataset/` n'existe pas au lancement, des images **placeholder colorées**
-sont créées automatiquement pour tester.
+Si le téléchargement échoue (réseau restreint) :
+1. Téléchargez manuellement :  
+   `https://storage.googleapis.com/mediapipe-models/hand_landmarker/hand_landmarker/float16/1/hand_landmarker.task`
+2. Placez le fichier **dans le même dossier** que `main.py`
 
 ---
 
-## Architecture
+## ✋ Gestes reconnus
 
-```
-webcam frame
-    ├─► MediaPipe Hands  → classify_hand_sign() → label (ex: "peace")
-    │                                            → image aléatoire dans dataset/peace/
-    └─► MediaPipe FaceMesh (landmarks)
-        FER detector      → emotion dominante    → image aléatoire dans dataset/happy/
-```
+| Geste | Action |
+|-------|--------|
+| ☝ Index seul | **Dessiner** |
+| ✌ Index + Majeur | **Pause** (lève le crayon) |
+| ✊ Poing fermé | **Gomme** |
+| 🤙 Pouce + Auriculaire | **Annuler** (Ctrl+Z) |
+| 🖐 Main ouverte | **Effacer tout** |
 
 ---
 
-## Remplacer FER par un modèle PyTorch custom
+## ⌨️ Raccourcis clavier
 
-Dans `main()`, remplace le bloc FER par :
+| Touche | Action |
+|--------|--------|
+| `C` | Effacer tout |
+| `Z` | Annuler |
+| `S` | Sauvegarder PNG |
+| `M` | Activer/désactiver formes auto |
+| `+` / `)` | Taille du pinceau |
+|ù = -   * = +|
+| `1` à `6` | Choisir une couleur |
+| `Q` / `Échap` | Quitter |
 
-```python
-import torch
-import torchvision.transforms as T
+---
 
-model = torch.load("mon_modele_emotion.pt").eval()
-transform = T.Compose([T.ToPILImage(), T.Resize((48,48)), T.Grayscale(), T.ToTensor()])
+## 🎨 Design
 
-# Dans la boucle :
-tensor = transform(face_roi).unsqueeze(0)
-with torch.no_grad():
-    pred = model(tensor).argmax().item()
-emotion_label = EXPRESSION_LABELS[pred]
-```
+Interface identique à la version HTML :
+- Fond sombre `#0a0a0f` + panneaux latéraux
+- Polices antialiasées (Liberation / DejaVu)
+- Effets de **glow néon** via Pillow `GaussianBlur`
+- Curseur animé selon le geste détecté
+- Toast notifications avec halo lumineux
+- Palette de 6 couleurs néon + indicateur actif
+- Barre de progression pour taille et opacité
+
+---
+
+*✦ GestureDraw v3*
