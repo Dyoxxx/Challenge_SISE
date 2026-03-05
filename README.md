@@ -73,7 +73,7 @@ Si le téléchargement échoue (réseau restreint) :
 | `S` | Sauvegarder PNG |
 | `M` | Activer/désactiver formes auto |
 | `+` / `)` | Taille du pinceau |
-|ù = -   * = +|
+| `ù` / `*` | Opacité du pinceau |
 | `1` à `6` | Choisir une couleur |
 | `Q` / `Échap` | Quitter |
 
