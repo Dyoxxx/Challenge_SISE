@@ -35,7 +35,7 @@ python main.py
 ```
 
 > ✅ **Python 3.10+** · Webcam obligatoire  
-> ✅ Compatible **Windows / Linux / macOS**  
+> ✅ Compatible **Windows / Linux**  
 > ✅ Compatible **mediapipe < 0.10.14** (ancienne API `solutions`)  
 > ✅ Compatible **mediapipe >= 0.10.14** (nouvelle API `tasks`) — télécharge `hand_landmarker.task` automatiquement
 
@@ -72,23 +72,10 @@ Si le téléchargement échoue (réseau restreint) :
 | `Z` | Annuler |
 | `S` | Sauvegarder PNG |
 | `M` | Activer/désactiver formes auto |
-| `+` / `)` | Taille du pinceau |
+| `)` / `+` | Taille du pinceau |
 | `ù` / `*` | Opacité du pinceau |
 | `1` à `6` | Choisir une couleur |
 | `Q` / `Échap` | Quitter |
-
----
-
-## 🎨 Design
-
-Interface identique à la version HTML :
-- Fond sombre `#0a0a0f` + panneaux latéraux
-- Polices antialiasées (Liberation / DejaVu)
-- Effets de **glow néon** via Pillow `GaussianBlur`
-- Curseur animé selon le geste détecté
-- Toast notifications avec halo lumineux
-- Palette de 6 couleurs néon + indicateur actif
-- Barre de progression pour taille et opacité
 
 ---
 
