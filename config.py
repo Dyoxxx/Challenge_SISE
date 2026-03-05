@@ -139,7 +139,7 @@ class Config:
     C_GREEN = (80, 255, 100)
 
     # ── Mistral ──────────────────────────────────────────────
-    MISTRAL_API_KEY = "M46QNCBv0BMWGMBfH29xi3RJWqf7Oe3h"
+    MISTRAL_API_KEY = ""
 
     def __init__(self):
         self._color_idx = 0
