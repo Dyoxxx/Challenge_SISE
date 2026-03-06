@@ -3,3 +3,5 @@ mediapipe>=0.10.0
 numpy>=1.24.0
 Pillow>=10.0.0
 requests>=2.28.0
+# Aucune lib supplémentaire requise — image_generator utilise urllib (stdlib)
+# Pour Ollama local : installer depuis https://ollama.com (aucune lib Python)

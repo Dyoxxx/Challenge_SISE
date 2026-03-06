@@ -15,6 +15,10 @@ gesture_draw_v3/
 ├── gesture.py          ← Détection des 5 gestes
 ├── drawing.py          ← Moteur dessin + undo + PNG
 ├── shape_detector.py   ← Reconnaissance formes géo.
+├── image_completer.py  ← Complétion d'image pour IA
+├── image_generator.py  ← Génération d'image IA
+├── image_windows.py    ← Affichage d'image IA
+├── llm_providers.py    ← Gestion des IA
 ├── renderer.py         ← Primitives Pillow (glow, texte antialiasé)
 ├── ui.py               ← Interface néon complète
 ├── requirements.txt

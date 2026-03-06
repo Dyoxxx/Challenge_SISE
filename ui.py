@@ -229,7 +229,7 @@ class UIManager:
         _sep(d, fy, 0, self.W, self.BOR)
         _t(
             d,
-            "GestureDraw v3  ✦  I=Enhance  A=Artwork  C=Effacer  Z=Annuler  S=Sauver  Q=Quitter",
+            "GestureDraw  ✦  I=Enhance  A=Artwork IA  C=Effacer  Z=Annuler  S=Sauver  Q=Quitter",
             14,
             fy + self.FH // 2,
             self.MUT,
@@ -259,9 +259,9 @@ class UIManager:
         _t(d, "IA MISTRAL", rx + 10, y, self.PUR, self.f_sec)
         y += self.FS + 8
         for txt, col in [
-            ("I  = Enhance (remplace canvas)", self.ACC),
-            ("A  = Artwork (sauvegarde PNG)", self.A3),
-            ("Pixtral-12b analyse le dessin", self.MUT),
+            ("I  = Enhance  (remplace canvas)", self.ACC),
+            ("A  = Artwork  (vraie image IA)", self.A3),
+            ("Multi-provider : FLUX, DALL-E…", self.MUT),
         ]:
             _t(d, txt, rx + 10, y, col, self.f_small)
             y += self.FSS + 5
@@ -503,7 +503,7 @@ class UIManager:
             ("S", "Sauver"),
             ("M", "Formes"),
             ("I", "IA Enhance"),
-            ("A", "IA Artwork"),
+            ("A", "Artwork IA"),
             ("Q", "Quitter"),
         ]:
             if y + self.FSB > ph - 4:
@@ -626,7 +626,7 @@ class UIManager:
         dots = "." * (int(t * 3) % 4)
         _t(
             d,
-            f"Mistral analyse{dots}",
+            f"IA en cours{dots}",
             cx,
             by + bh // 2 - 6,
             self.TXT,
